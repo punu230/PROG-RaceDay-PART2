@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RaceDay.API.DTOs.Auth;
 using RaceDay.API.Services;
 
+// Handles user registration and login for the RaceDay API.s
 namespace RaceDay.API.Controllers;
 
 [ApiController]
