@@ -1,4 +1,5 @@
-﻿namespace RaceDay.API.Models;
+﻿// Represents a race category within an event.
+namespace RaceDay.API.Models;
 
 public class Role
 {
