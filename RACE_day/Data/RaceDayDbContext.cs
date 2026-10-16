@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Models;
 
+// Database context for the RaceDay system
+
 namespace RaceDay.API.Data;
 
 public class RaceDayDbContext : DbContext
