@@ -8,6 +8,7 @@ using RaceDay.API.DTOs.Events;
 using RaceDay.API.Models;
 using Xunit;
 
+// Unit tests for the EventsController.
 namespace raceDAY.Test;
 
 public class EventControllerTests
