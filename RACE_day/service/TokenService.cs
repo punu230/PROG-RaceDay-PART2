@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using RaceDay.API.Models;
 
+// Service for generating JWT tokens.
 namespace RaceDay.API.Services;
 
 public class TokenService : ITokenService
