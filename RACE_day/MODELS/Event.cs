@@ -1,4 +1,5 @@
-﻿namespace RaceDay.API.Models;
+﻿// Represents a race event in the system.
+namespace RaceDay.API.Models;
 
 public class Event
 {
