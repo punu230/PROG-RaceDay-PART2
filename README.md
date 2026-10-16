@@ -50,6 +50,7 @@ The RaceDay RESTful API is built with **ASP.NET Core 8** using **Entity Framewor
 - ✅ Swagger UI documentation with accurate auth indicators
 - ✅ GitHub Actions CI/CD pipeline
 
+
 ---
 
 ## User Roles
@@ -78,4 +79,5 @@ The RaceDay RESTful API is built with **ASP.NET Core 8** using **Entity Framewor
    <img width="1895" height="612" alt="ci-green-build PNG" src="https://github.com/user-attachments/assets/d07cd755-ab0c-4de8-b86f-f83e1fc9f10a" />
 
    <img width="1919" height="601" alt="tests-passing" src="https://github.com/user-attachments/assets/9698452d-5716-4412-ac53-950fd9491952" />
+   Part 2 Video:https://youtu.be/xMW1bUvfI2U
 
