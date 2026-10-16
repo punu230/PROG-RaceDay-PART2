@@ -6,6 +6,7 @@ using RaceDay.API.Data;
 using RaceDay.API.DTOs.Enrolments;
 using RaceDay.API.Models;
 
+// Handles participant enrolments for event categories.
 namespace RaceDay.API.Controllers;
 
 [ApiController]
