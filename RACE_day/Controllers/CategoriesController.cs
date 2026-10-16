@@ -6,6 +6,7 @@ using RaceDay.API.Data;
 using RaceDay.API.DTOs.Categories;
 using RaceDay.API.Models;
 
+// Handles event category management for organisers.
 namespace RaceDay.API.Controllers;
 
 [ApiController]
