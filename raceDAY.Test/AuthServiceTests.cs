@@ -6,6 +6,7 @@ using RaceDay.API.Models;
 using RaceDay.API.Services;
 using Xunit;
 
+// Unit tests for the AuthService.
 namespace raceDAY.Test;
 
 public class AuthServiceTests
