@@ -75,6 +75,7 @@ The RaceDay RESTful API is built with **ASP.NET Core 8** using **Entity Framewor
    git clone https://github.com/punu230/PROG-RaceDay-PART2.git
    cd PROG-RaceDay-PART2
 
-   <img width="1895" height="612" alt="ci-green-build" src="https://github.com/user-attachments/assets/cb6e2a14-53a3-417c-8b7a-71dc3341cbe7" />
+   <img width="1895" height="612" alt="ci-green-build PNG" src="https://github.com/user-attachments/assets/d07cd755-ab0c-4de8-b86f-f83e1fc9f10a" />
+
    <img width="1919" height="601" alt="tests-passing" src="https://github.com/user-attachments/assets/9698452d-5716-4412-ac53-950fd9491952" />
 
