@@ -1,3 +1,4 @@
+// Application entry point and service configuration.
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
