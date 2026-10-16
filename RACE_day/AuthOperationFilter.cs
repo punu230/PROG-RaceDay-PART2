@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
+// Swagger filter for accurate auth lock icons.
 namespace RaceDay.API;
 
 public class AuthOperationFilter : IOperationFilter
