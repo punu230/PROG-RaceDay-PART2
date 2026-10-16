@@ -6,6 +6,7 @@ using RaceDay.API.Data;
 using RaceDay.API.DTOs.Results;
 using RaceDay.API.Models;
 
+// Handles race result recording and retrieval.
 namespace RaceDay.API.Controllers;
 
 [ApiController]
