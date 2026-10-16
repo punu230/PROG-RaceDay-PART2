@@ -8,6 +8,7 @@ using RaceDay.API.DTOs.Events;
 using RaceDay.API.Models;
 using Xunit;
 
+// Tests verifying role-based access control.
 namespace raceDAY.Test;
 
 public class RoleBasedAccessTests
