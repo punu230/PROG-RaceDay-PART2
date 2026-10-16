@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Data;
 using RaceDay.API.DTOs.Users;
 
+// Handles user profile retrieval and updates.
 namespace RaceDay.API.Controllers;
 
 [ApiController]
