@@ -1,4 +1,5 @@
-﻿namespace RaceDay.API.Models;
+﻿// Represents a system user with role information.
+namespace RaceDay.API.Models;
 
 public class User
 {
