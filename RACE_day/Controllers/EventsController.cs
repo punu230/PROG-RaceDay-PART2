@@ -6,6 +6,7 @@ using RaceDay.API.Data;
 using RaceDay.API.DTOs.Events;
 using RaceDay.API.Models;
 
+// Handles event management including creation, retrieval, and updates.
 namespace RaceDay.API.Controllers;
 
 [ApiController]
