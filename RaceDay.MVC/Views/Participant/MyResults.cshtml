@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "My Results";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">My Race Results</h2>
+
+    @if (ViewBag.Results == null || ViewBag.Results.Count == 0)
+    {
+        <div class="alert alert-info shadow-sm">
+            You don't have any recorded results yet. Keep training!
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Event</th>
+                        <th>Category</th>
+                        <th>Finish Time</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var res in ViewBag.Results)
+                    {
+                        <tr>
+                            <td class="fw-bold">@res.EventName</td>
+                            <td>@res.CategoryName</td>
+                            <td><span class="badge bg-success fs-6">@res.FinishTime</span></td>
+                            <td><span class="badge bg-primary fs-6">@res.Position</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

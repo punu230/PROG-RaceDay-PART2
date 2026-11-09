@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Event Enrolments";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Enrolments & Results</h2>
+        <a href="/Organiser/ManageEvent/@ViewBag.EventId" class="btn btn-secondary">Back to Event</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success fw-bold">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger fw-bold">@TempData["Error"]</div>
+    }
+
+    @if (ViewBag.Enrolments == null || ViewBag.Enrolments.Count == 0)
+    {
+        <div class="alert alert-info shadow-sm">
+            No participants have enrolled in this event yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive shadow-sm">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Participant</th>
+                        <th>Category</th>
+                        <th>Payment Status</th>
+                        <th>Record Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enr in ViewBag.Enrolments)
+                    {
+                        <tr>
+                            <td class="fw-bold">@enr.ParticipantName</td>
+                            <td>@enr.CategoryName</td>
+                            <td>
+                                @if (enr.IsPaid)
+                                {
+                                    <span class="badge bg-success">Paid</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                }
+                            </td>
+                            <td>
+                                <form method="post" asp-action="AddResult" class="d-flex gap-2 align-items-center">
+                                    <input type="hidden" name="enrolmentId" value="@enr.EnrolmentId" />
+                                    <input type="hidden" name="eventId" value="@ViewBag.EventId" />
+
+                                    <input type="text" name="finishTime" class="form-control form-control-sm" placeholder="HH:MM:SS" required style="width: 110px;" />
+                                    <input type="number" name="position" class="form-control form-control-sm" placeholder="Pos" required style="width: 70px;" />
+
+                                    <button type="submit" class="btn btn-sm btn-success fw-bold">Save</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

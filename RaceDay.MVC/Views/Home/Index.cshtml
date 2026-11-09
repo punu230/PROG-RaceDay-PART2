@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Upcoming Events";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Upcoming Races</h1>
+        <p class="lead">Find your next challenge and join the community.</p>
+    </div>
+
+    @if (ViewBag.Events == null || ViewBag.Events.Count == 0)
+    {
+        <div class="alert alert-warning text-center">
+            No upcoming events found. Check back later!
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var ev in ViewBag.Events)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow h-100 border-0">
+                        @if (!string.IsNullOrEmpty(ev.ImageUrl))
+                        {
+                            <img src="@ev.ImageUrl" class="card-img-top" alt="@ev.Name" style="height: 180px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <!-- Placeholder if no image -->
+                            <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 180px;">
+                                No Image
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">@ev.Name</h4>
+                            <h6 class="card-subtitle mb-3 text-muted">@ev.Date.ToString("dd MMM yyyy")</h6>
+                            <p class="card-text mb-1"><strong>📍 Location:</strong> @ev.Location</p>
+                            <p class="card-text"><strong>🏃 Distance:</strong> @ev.Distance km</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-3">
+                            <a href="/Home/EventDetails/@ev.Id" class="btn btn-outline-primary w-100 fw-bold">View & Enrol</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

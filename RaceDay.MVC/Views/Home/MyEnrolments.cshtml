@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "My Enrolments";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">My Enrolments</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success fw-bold">@TempData["Success"]</div>
+    }
+
+    @if (ViewBag.Enrolments == null || ViewBag.Enrolments.Count == 0)
+    {
+        <div class="alert alert-info shadow-sm">
+            You haven't enrolled in any events yet. <a href="/">Browse events here!</a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var enr in ViewBag.Enrolments)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-left-success h-100">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold text-dark">@enr.EventName</h4>
+                            <h6 class="card-subtitle mb-3 text-muted">📅 @enr.EventDate.ToString("dd MMM yyyy")</h6>
+
+                            <p class="mb-1"><strong>Category:</strong> @enr.CategoryName</p>
+                            <p class="mb-2"><strong>Entry Fee:</strong> R @enr.Fee</p>
+
+                            <div>
+                                <strong>Status:</strong>
+                                @if (enr.IsPaid)
+                                {
+                                    <span class="badge bg-success">Paid</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">Pending Payment</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

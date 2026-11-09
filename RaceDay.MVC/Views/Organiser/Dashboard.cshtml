@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Organiser Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Organiser Dashboard</h2>
+        <a asp-action="CreateEvent" class="btn btn-success fw-bold">+ Create New Event</a>
+    </div>
+
+    @if (ViewBag.Events == null || ViewBag.Events.Count == 0)
+    {
+        <div class="alert alert-info shadow-sm">
+            You haven't created any events yet. Click "Create New Event" to get started!
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var ev in ViewBag.Events)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100 border-left-primary">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary fw-bold">@ev.Name</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">📅 @ev.Date.ToString("dd MMM yyyy")</h6>
+                            <p class="card-text mb-1"><strong>Location:</strong> @ev.Location</p>
+                            <p class="card-text"><strong>Distance:</strong> @ev.Distance km</p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <a href="/Organiser/ManageEvent/@ev.Id" class="btn btn-outline-primary btn-sm w-100 fw-bold">Manage Event & Categories</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
