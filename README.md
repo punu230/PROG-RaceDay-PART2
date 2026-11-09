@@ -1,83 +1,41 @@
 # RaceDay System
 
-A full-stack web-based event management system designed for the South African road running, walking, and cycling community.
+A full-stack web application for managing road running, walking, and cycling events in South Africa.
 
-![RaceDay](https://img.shields.io/badge/RaceDay-Event%20Management-blue)
-![.NET](https://img.shields.io/badge/.NET-8.0-purple)
-![License](https://img.shields.io/badge/License-Academic-green)
+## Features
+- **RESTful API:** ASP.NET Core 8 Web API with Entity Framework Core and SQL Server.
+- **MVC Frontend:** Razor views with session management, role-based navigation, and responsive Bootstrap UI.
+- **Role-Based Access:** Distinct interfaces for Organisers (manage events, categories, results) and Participants (browse, enrol, view results).
+- **Azure Blob Storage:** Organisers can upload event banner images securely to Azure. Images are displayed on the event pages.
+- **Dockerized MVC:** The frontend runs inside a Docker container.
 
----
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Part 2: RESTful API](#part-2-restful-api)
-3. [User Roles](#user-roles)
-4. [Setup Instructions](#setup-instructions)
-5. [API Endpoints](#api-endpoints)
-6. [Authentication](#authentication)
-7. [Testing](#testing)
-8. [CI/CD Pipeline](#cicd-pipeline)
-9. [Screenshots](#screenshots)
-10. [Video Presentation](#video-presentation)
-11. [Technologies Used](#technologies-used)
-12. [Part 1: System Planning](#part-1-system-planning)
-
----
-
-## Overview
-
-The RaceDay platform is a full-stack web application for managing road running, walking, and cycling events in South Africa. It allows **Event Organisers** to create and manage events, and **Participants** to browse events, enrol, and track their results.
-
-This repository contains:
-- **Part 1** — System planning, ERD, API plan, SQL database script
-- **Part 2** — RESTful API implementation with authentication, testing, and CI/CD
-
----
-
-## Part 2: RESTful API
-
-The RaceDay RESTful API is built with **ASP.NET Core 8** using **Entity Framework Core (Code-First)** with **SQL Server**. It provides JWT-authenticated endpoints with role-based access control.
-
-### Features Implemented
-- ✅ User registration and login (Organiser and Participant)
-- ✅ JWT Bearer authentication with BCrypt password hashing
-- ✅ Role-based access control
-- ✅ Full CRUD for Events and Categories
-- ✅ Event enrolments
-- ✅ Race results management
-- ✅ 27 unit tests with 100% pass rate
-- ✅ Swagger UI documentation with accurate auth indicators
-- ✅ GitHub Actions CI/CD pipeline
-
-
----
-
-## User Roles
-
-| Role | Description | Permissions |
-|------|-------------|-------------|
-| **Organiser** | Event creator and manager | Create, update, delete events; add categories; view enrolments; record results |
-| **Participant** | Event participant | Browse events; enrol in categories; view own enrolments and results |
-
----
+## Tech Stack
+- ASP.NET Core 8 (API & MVC)
+- Entity Framework Core
+- SQL Server
+- JWT Authentication
+- Azure Blob Storage (`Azure.Storage.Blobs`)
+- Docker
+- xUnit & Moq
 
 ## Setup Instructions
 
 ### Prerequisites
 - .NET 8.0 SDK
 - SQL Server (LocalDB or Express)
-- Visual Studio 2022 (or VS Code with C# extension)
+- Docker Desktop
 
-### Steps to Run
+### Running Locally
+1. Clone the repository.
+2. Open the solution `RACE_day.sln` in Visual Studio 2022.
+3. Update the `appsettings.json` in `RACE_day` with your JWT Key and Azure Connection String.
+4. In the Package Manager Console, run `Update-Database`.
+5. Set Multiple Startup Projects: `RACE_day` and `RaceDay.MVC`.
+6. Press F5.
 
-1. **Clone the repository:**
+### Running with Docker
+To run the MVC application inside a Docker container:
+
+1. Build the Docker image from the root of the repository:
    ```bash
-   git clone https://github.com/punu230/PROG-RaceDay-PART2.git
-   cd PROG-RaceDay-PART2
-
-   <img width="1895" height="612" alt="ci-green-build PNG" src="https://github.com/user-attachments/assets/d07cd755-ab0c-4de8-b86f-f83e1fc9f10a" />
-
-   <img width="1919" height="601" alt="tests-passing" src="https://github.com/user-attachments/assets/9698452d-5716-4412-ac53-950fd9491952" />
-   Part 2 Video:https://youtu.be/xMW1bUvfI2U
-
+   docker build -t raceday-mvc -f RaceDay.MVC/Dockerfile .
