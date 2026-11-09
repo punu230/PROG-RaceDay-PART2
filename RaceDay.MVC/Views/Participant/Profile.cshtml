@@ -23,6 +23,28 @@
 
                     <p><strong>Emergency Contact:</strong> @profile.EmergencyContact</p>
                     <p><strong>Medical Conditions:</strong> @profile.MedicalConditions</p>
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Success"]</div>
+                    }
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Error"]</div>
+                    }
+
+                    <hr />
+                    <h5 class="mb-3">Update Details</h5>
+                    <form method="post" asp-action="UpdateProfile">
+                        <div class="mb-3">
+                            <label class="form-label">Emergency Contact Name</label>
+                            <input type="text" name="emergencyContactName" class="form-control" value="@profile.EmergencyContact" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Medical Conditions</label>
+                            <textarea name="medicalConditions" class="form-control" rows="2">@profile.MedicalConditions</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    </form>
                 </div>
             </div>
         </div>
