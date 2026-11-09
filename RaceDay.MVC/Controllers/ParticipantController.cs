@@ -43,6 +43,30 @@ namespace RaceDay.MVC.Controllers
             ViewBag.Profile = profile;
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(string emergencyContactName, string medicalConditions)
+        {
+            if (!IsParticipant()) return RedirectToAction("Login", "Auth");
+
+            var updateData = new
+            {
+                emergencyContactName = emergencyContactName,
+                medicalConditions = medicalConditions
+            };
+
+            var response = await _apiService.PutAsync("users/profile", updateData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Success"] = "Profile updated successfully!";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to update profile.";
+            }
+
+            return RedirectToAction("Profile");
+        }
 
         // 2. View Personal Race Results
         [HttpGet]
