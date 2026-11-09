@@ -174,37 +174,45 @@ namespace RaceDay.MVC.Controllers
 
             ViewBag.EventId = eventId;
 
-            var eventJson = await _apiService.GetAsync<JsonElement>($"events/{eventId}");
-            var enrolmentsList = new List<object>();
-
-            if (eventJson.TryGetProperty("categories", out var categoriesJson) && categoriesJson.ValueKind == JsonValueKind.Array)
+            try
             {
-                foreach (var cat in categoriesJson.EnumerateArray())
+                var eventJson = await _apiService.GetAsync<JsonElement>($"events/{eventId}");
+                var enrolmentsList = new List<object>();
+
+                if (eventJson.TryGetProperty("categories", out var categoriesJson) && categoriesJson.ValueKind == JsonValueKind.Array)
                 {
-                    int categoryId = cat.GetProperty("categoryID").GetInt32();
-
-                    var enrolmentsJson = await _apiService.GetAsync<JsonElement>($"events/{eventId}/categories/{categoryId}/enrolments");
-
-                    if (enrolmentsJson.ValueKind == JsonValueKind.Array)
+                    foreach (var cat in categoriesJson.EnumerateArray())
                     {
-                        foreach (var enr in enrolmentsJson.EnumerateArray())
+                        int categoryId = cat.GetProperty("categoryID").GetInt32();
+
+                        // Fetch enrolments for this specific category
+                        var enrolmentsJson = await _apiService.GetAsync<JsonElement>($"events/{eventId}/categories/{categoryId}/enrolments");
+
+                        if (enrolmentsJson.ValueKind == JsonValueKind.Array)
                         {
-                            enrolmentsList.Add(new
+                            foreach (var enr in enrolmentsJson.EnumerateArray())
                             {
-                                EnrolmentId = enr.GetProperty("enrolmentID").GetInt32(),
-                                ParticipantName = enr.GetProperty("participantName").GetString(),
-                                CategoryName = cat.GetProperty("name").GetString(),
-                                IsPaid = enr.GetProperty("isPaid").GetBoolean()
-                            });
+                                enrolmentsList.Add(new
+                                {
+                                    EnrolmentId = enr.GetProperty("enrolmentID").GetInt32(),
+                                    ParticipantName = enr.GetProperty("participantName").GetString(),
+                                    CategoryName = cat.GetProperty("name").GetString(),
+                                    IsPaid = enr.GetProperty("isPaid").GetBoolean()
+                                });
+                            }
                         }
                     }
                 }
+
+                ViewBag.Enrolments = enrolmentsList;
+                return View();
             }
-
-            ViewBag.Enrolments = enrolmentsList;
-            return View();
+            catch (Exception ex)
+            {
+                // If the API fails, this will show you the exact error on the screen!
+                return Content($"Error fetching enrolments: {ex.Message}");
+            }
         }
-
         // 7. ADD RESULT FOR A PARTICIPANT
         [HttpPost]
         public async Task<IActionResult> AddResult(int enrolmentId, int eventId, string finishTime, int position)
