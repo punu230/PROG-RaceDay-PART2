@@ -39,3 +39,4 @@ To run the MVC application inside a Docker container:
 1. Build the Docker image from the root of the repository:
    ```bash
    docker build -t raceday-mvc -f RaceDay.MVC/Dockerfile .
+   https://youtu.be/ssM-sYFWleE 
