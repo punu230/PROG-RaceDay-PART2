@@ -16,4 +16,6 @@ public class Event
     // Navigation properties
     public Organiser Organiser { get; set; } = null!;
     public ICollection<Category> Categories { get; set; } = new List<Category>();
+
+    public string? ImageUrl { get; set; }
 }

@@ -6,7 +6,6 @@ using RaceDay.API.Data;
 using RaceDay.API.DTOs.Events;
 using RaceDay.API.Models;
 
-// Handles event management including creation, retrieval, and updates.
 namespace RaceDay.API.Controllers;
 
 [ApiController]
@@ -28,7 +27,6 @@ public class EventsController : ControllerBase
 
     // ============================================================
     // GET: /api/events
-    // PUBLIC — anyone can browse events
     // ============================================================
     [HttpGet]
     [AllowAnonymous]
@@ -58,7 +56,8 @@ public class EventsController : ControllerBase
                 RegistrationDeadline = e.RegistrationDeadline,
                 IsActive = e.IsActive,
                 OrganiserName = e.Organiser.OrganisationName,
-                CategoryCount = e.Categories.Count
+                CategoryCount = e.Categories.Count,
+                ImageUrl = e.ImageUrl // <--- ADDED HERE
             })
             .ToListAsync();
 
@@ -67,7 +66,6 @@ public class EventsController : ControllerBase
 
     // ============================================================
     // GET: /api/events/{id}
-    // PUBLIC — anyone can view a single event
     // ============================================================
     [HttpGet("{id}")]
     [AllowAnonymous]
@@ -95,6 +93,7 @@ public class EventsController : ControllerBase
             eventEntity.RouteDistanceKM,
             eventEntity.RegistrationDeadline,
             eventEntity.IsActive,
+            eventEntity.ImageUrl, // <--- ADDED HERE
             OrganiserName = eventEntity.Organiser.OrganisationName,
             Categories = eventEntity.Categories.Select(c => new
             {
@@ -110,7 +109,6 @@ public class EventsController : ControllerBase
 
     // ============================================================
     // POST: /api/events
-    // ORGANISER ONLY
     // ============================================================
     [HttpPost]
     [Authorize(Roles = "Organiser")]
@@ -149,7 +147,8 @@ public class EventsController : ControllerBase
             Location = dto.Location,
             RouteDistanceKM = dto.RouteDistanceKM,
             RegistrationDeadline = dto.RegistrationDeadline,
-            IsActive = true
+            IsActive = true,
+            ImageUrl = dto.ImageUrl // <--- ADDED HERE
         };
 
         _context.Events.Add(eventEntity);
@@ -164,13 +163,13 @@ public class EventsController : ControllerBase
             eventEntity.Location,
             eventEntity.RouteDistanceKM,
             eventEntity.RegistrationDeadline,
-            eventEntity.IsActive
+            eventEntity.IsActive,
+            eventEntity.ImageUrl // <--- ADDED HERE
         });
     }
 
     // ============================================================
     // PUT: /api/events/{id}
-    // ORGANISER ONLY (must own the event)
     // ============================================================
     [HttpPut("{id}")]
     [Authorize(Roles = "Organiser")]
@@ -216,6 +215,7 @@ public class EventsController : ControllerBase
         if (dto.RouteDistanceKM.HasValue) eventEntity.RouteDistanceKM = dto.RouteDistanceKM.Value;
         if (dto.RegistrationDeadline.HasValue) eventEntity.RegistrationDeadline = dto.RegistrationDeadline.Value;
         if (dto.IsActive.HasValue) eventEntity.IsActive = dto.IsActive.Value;
+        if (dto.ImageUrl != null) eventEntity.ImageUrl = dto.ImageUrl; // <--- ADDED HERE
 
         await _context.SaveChangesAsync();
 
@@ -228,13 +228,13 @@ public class EventsController : ControllerBase
             eventEntity.Location,
             eventEntity.RouteDistanceKM,
             eventEntity.RegistrationDeadline,
-            eventEntity.IsActive
+            eventEntity.IsActive,
+            eventEntity.ImageUrl // <--- ADDED HERE
         });
     }
 
     // ============================================================
     // DELETE: /api/events/{id}
-    // ORGANISER ONLY (must own the event) — soft delete
     // ============================================================
     [HttpDelete("{id}")]
     [Authorize(Roles = "Organiser")]

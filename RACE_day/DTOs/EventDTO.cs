@@ -12,4 +12,5 @@ public class EventDto
     public bool IsActive { get; set; }
     public string OrganiserName { get; set; } = string.Empty;
     public int CategoryCount { get; set; }
+    public string? ImageUrl { get; set; } // <--- ADD THIS LINE
 }

@@ -23,4 +23,6 @@ public class CreateEventDto
 
     [Required]
     public DateTime RegistrationDeadline { get; set; }
+
+    public string? ImageUrl { get; set; } // <--- ADD THIS LINE
 }
